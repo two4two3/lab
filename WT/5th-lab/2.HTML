@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAB 5-2</title>
+</head>
+
+<body>
+    <form action="">
+        <table align="center">
+            <tr>
+                <td colspan="2" align="center">COVID-19 Veccine Registration Form</td>
+            </tr>
+            <tr>
+                <td>First Name</td>
+                <td>
+                    <input type="text" name="firstname" id="fname" required >
+                </td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>
+                    <input type="text" name="lastname" id="lname" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Aadhaar Number</td>
+                <td>
+                    <input type="number" name="adhar" id="adr" minlength="12" maxlength="12" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Vaccine Name</td>
+                <td>
+                    <select name="vcnname" id="vcnname">
+                        <option selected disabled value="">Please Select Vaccine Name</option>
+                        <option value="covid-19">covid-19 vaccine</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Vaccine Center Name</td>
+                <td>
+                    <select name="vcncntrname" id="vcncntrname">
+                        <option selected disabled value="">Please Select Vaccine Center Name</option>
+                        <option value="covid-19">Darshan University</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Date of Dose</td>
+                <td>
+                    <input type="date" name="dt" id="dt" required >
+                </td>
+            </tr>
+            <tr>
+                <td>Number of Dose</td>
+                <td>
+                    <input type="number" name="nod" id="nod" required >
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Click here">
+                    <input type="reset" value="CANCEL">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

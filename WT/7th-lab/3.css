@@ -1,0 +1,19 @@
+form{
+    padding: 1rem;
+}
+input[type="text"]{
+    background-color: #e88989;
+    color: #610101;
+}
+
+input[type="submit"]{
+    background-color: green;
+}
+input[type="reset"]{
+    color: black;
+    background-color: yellow;
+}
+
+#lbl_name{
+    color: white;
+}

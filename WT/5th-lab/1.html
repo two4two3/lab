@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab-5-1</title>
+</head>
+
+<body>
+    <form action="/">
+        <table align="center" style="width: 350px;">
+            <tr>
+                <td colspan="2" align="center">
+                    <h2>Student Registration</h2>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    FullName
+                </td>
+                <td align="center">
+                    <input type="text" placeholder="Enter Your Full Name" required >
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    Email
+                </td>
+                <td align="center">
+                    <input type="email" placeholder="Enter your email" required >
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    mobile no
+                </td>
+                <td align="center">
+                    <input type="tel" pattern="[0-9]{10}" required >
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    Address
+                </td>
+                <td align="center">
+                    <textarea name="adr" id="adr" placeholder="Write your Address here."></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    Nationality
+                </td>
+                <td align="center">
+                    <input type="text" name="Nationalit" id="Nationality" required >
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    Date of Birth
+                </td>
+                <td align="center">
+                    <input type="date" name="dob" id="dob" required >
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    Gender
+                </td>
+                <td align="center">
+                    <input type="radio" name="Gender" id="gender" value="male" required >Male
+                    <input type="radio" name="Gender" id="gender" value="female">Female
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    Highest Degree
+                </td>
+                <td align="center">
+                    <select name="highestDegree" id="degree">
+                        <option value="default">Select A degree</option>
+                        <option value="diploma">Diploma</option>
+                        <option value="10th">10th</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    CPI
+                </td>
+                <td align="center">
+                    <input type="number" name="CPI" id="CPI" step="any" min="0" max="10" maxlength="4" required >
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    University
+                </td>
+                <td align="center">
+                    <input type="text" name="uni" id="uni" required >
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    Passing Year
+                </td>
+                <td align="center">
+                    <select name="passyear" id="passyear">
+                        <option selected disabled value="">Select Your Passing Year:</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Cencel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab 8-1</title>
+
+    <style>
+        body{
+            width: 400px;
+            display: block;
+            margin: 0 auto;
+        }
+        header{
+            display: flex;
+        }
+        header > div{
+            padding:0.4rem;
+            border: solid red;
+            flex: 3;
+        }
+        header > nav{
+            padding:0.4rem;
+            flex: 9;
+            border: solid blue;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        main{
+            display: flex;
+        }
+        main #first{
+            border: solid orange;
+            flex: 1;
+        }
+        main #second{
+            border: solid green;
+            flex:2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>Logo Here</div>
+        <nav>
+            <a href="">
+                Home
+            </a>
+
+            <a href="">
+                About
+            </a>
+
+            <a href="">
+                Contact
+            </a>
+        </nav>
+    </header>
+    <main>
+        <div id="first">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div id="second">
+            right col
+        </div>
+    </main>
+</body>
+</html>

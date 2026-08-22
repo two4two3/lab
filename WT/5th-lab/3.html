@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab 5-3</title>
+    <style>
+        body{
+            margin: 0;
+            background-color: #568091;
+        }
+        table{
+            background-color: #fcfcfc;
+        }
+        tr{
+            display: flex;
+            justify-content:space-around;
+            width: 100%;
+            &td {
+            }
+        }
+        label{
+            color: #1bba93;
+        }
+        td>h1{
+            background-color: #eff0f1;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <table align="center">
+            <tr>
+                <div>
+
+                <td colspan="2">
+                    <h1>Create Account</h1>
+                </td>
+                </div>
+            </tr>
+            <tr>
+                <div>
+                    
+                <td>
+                    <label for="fname">First name</label> <br>
+                    <input type="text" name="fname" id="fname">
+                </td>
+                </div>
+                <td>
+                        <label for="lname">Last name</label> <br>
+                        <input type="text" name="lname" id="lname">
+                <div>
+                    
+                </td>
+                </div>
+            </tr>
+            <tr>
+                <div>
+                    
+                <td id="id_mail" colspan="2">
+                        <label for="mail">Email</label> <br>
+                        <input type="email" name="mail" id="mail" required>
+                </td>
+                </div>
+            </tr>
+            <tr>
+                <div>
+                    
+                <td>
+                    <label for="pass">Password</label> <br>
+                    <input type="password" name="pass" id="pass">
+                </td>
+                </div>
+                <td>
+                    <label for="pass">Cofirm Password</label> <br>
+                    <input type="password" name="pass" id="pass">
+                <div>
+                    
+                </td>
+                </div>
+            </tr>
+            <tr>
+                <div>
+                    
+                <td>
+                    <label for="pass">Gender</label> <br>
+                    <input type="radio" name="Gender" id="male" value="male">
+                    <label for="male">Male</label>
+                    <input type="radio" name="Gender" id="female" value="female">
+                    <label for="female">Female</label>
+                </td>
+                </div>
+                <td>
+                    <label for="hbs">Hobbies</label> <br>
+                    <input type="checkbox" name="music" id="music">
+                    <label for="music">Music</label>
+                    <input type="checkbox" name="sports" id="sports">
+                    <label for="sports">Sports</label>
+                    <input type="checkbox" name="travel" id="travel">
+                    <label for="travel">Travel</label>
+                    <input type="checkbox" name="movies" id="movies">
+                    <label for="movies">Movies</label>
+                <div>
+                    
+                </td>
+                </div>
+            </tr>
+            <tr>
+                <div>
+                    
+                <td>
+                    <label for="soi">Source of Income</label> <br>
+                    <select name="soi" id="soi">
+                        <option selected value="employed">Employed</option>
+                        <option value="unemployed">Unemployed</option>
+                        <option value="self-emp">Self-Employed</option>
+                    </select>
+                </td>
+                </div>
+                <td>
+                    <label for="soi">Income</label> <br>
+                    <input type="range" name="income" id="income">
+                <div>
+                    
+                </td>
+                </div>
+            </tr>
+            <tr>
+                <div>
+                    
+                <td>
+                    <label for="upload">Upload Profile</label> <br>
+                    <input type="file" name="upload" id="upload">
+                </td>
+                </div>
+                <td>
+                    <label for="age">Age</label> <br>
+                    <input type="number" name="age" id="age">
+                <div>
+                    
+                </td>
+                </div>
+            </tr>
+            <tr>
+                <div>
+                    
+                <td colspan="2">
+                    <label for="bio">Bio</label> <br>
+                    <textarea name="bio" id="bio"></textarea>
+                </td>
+                </div>
+            </tr>
+            <tr>
+                <div>
+                    
+                <td colspan="2">
+                    <input type="submit" value="Create">
+                </td>
+                </div>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
