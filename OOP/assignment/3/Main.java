@@ -1,6 +1,7 @@
 
 // HIGH LEVEL REQUIREMENTS:
 /*
+ * - Add league, match type:t20, oneday
  * - Two teams can play cricket match
  * - See the scorecard
  * - see history (each ball tracing)
@@ -17,6 +18,8 @@ class Player {
     int age;
     String jerseyNumber;
     int runs;
+    int ballsPlayed;
+    int oversDelivered; // over completed by bawler
     int boundary;
     int wickets;
     String playingType;// battter/bawler/all-rounder
@@ -39,23 +42,39 @@ class Winners {
 }
 
 class ScoreCard {
-    int runs;
-    int wickets;
-    Player striker;
-    Player nonStriker;
-    Player bawler;
-    int over;
-    int ball;
+    Inning inn;
 
     ScoreCard(Inning inn) {
-        this.runs = inn.battingTeam.runs;
-        this.wickets = inn.battingTeam.wickets;
-        this.striker = inn.striker;
-        this.nonStriker = inn.nonStriker;
-        this.bawler = inn.bawler;
+        this.inn = inn;
     }
 
-    void display() {
+    void display(int over) {
+
+        Main.clearConsole();
+        System.out.println("Over:" + over);
+        System.out.println(
+                this.inn.striker.name + " : " + this.inn.striker.runs + "(" + this.inn.striker.ballsPlayed + ")");
+        System.out
+                .println(this.inn.nonStriker.name + " : " + this.inn.nonStriker.runs + "("
+                        + this.inn.nonStriker.ballsPlayed + ")");
+        System.out
+                .println(this.inn.bawler.name + " : " + this.inn.bawler.wickets + "-" + this.inn.bawler.oversDelivered);
+
+        System.out.print("\n\t");
+        for (int i = 0; i < 6; i++) {
+            int currentBall = this.inn.overs[over][i];
+            if (this.inn.wides[over][i] > 0) {
+                System.out.print("Wide | ");
+            }
+            if (this.inn.noBalls[over][i] > 0) {
+                System.out.print("No Ball | ");
+            }
+            System.out.print(currentBall + " | ");
+        }
+        System.out.println();
+        while (!(this.inn.sc.nextLine()).equals("y")) {
+            System.out.print("continue?(y/n):");
+        }
     }
 }
 
@@ -87,24 +106,24 @@ class Inning {
         String notEligibleBattersJersey[] = new String[12];
         String notEligibleBawlersJersey[] = new String[12];
 
-        Main.flushConsole();
+        Main.clearConsole();
         System.out.println("Choose Striker:");
         this.striker = battingTeam.choose(notEligibleBattersJersey);
         notEligibleBattersJersey[k++] = this.striker.jerseyNumber;
 
-        Main.flushConsole();
+        Main.clearConsole();
         System.out.println("Choose Non-Striker:");
         this.nonStriker = battingTeam.choose(notEligibleBattersJersey);
         notEligibleBattersJersey[k++] = this.nonStriker.jerseyNumber;
 
         for (int i = 1; i <= overs.length; i++) {
 
-            Main.flushConsole();
+            Main.clearConsole();
             System.out.println("Choose Bawler for over " + i + ":");
             this.bawler = fieldingTeam.choose(notEligibleBawlersJersey);
             notEligibleBawlersJersey[0] = bawler.jerseyNumber;
 
-            Main.flushConsole();
+            Main.clearConsole();
             System.out.println("*********Over " + i + " begins*********\n");
             System.out.println("striker:" + " ".repeat(20 - 8) + this.striker.name);
             System.out.println("non-striker:" + " ".repeat(20 - 12) + this.nonStriker.name);
@@ -115,6 +134,7 @@ class Inning {
                 System.out
                         .print("Ball no " + (i - 1) + "." + j + " " + bawler.name + " to " + this.striker.name + ">>>");
                 int nextBall = sc.nextInt();
+
                 // handle wide/no ball/ wickett
                 if (nextBall == 1) {
                     // swap striker and non-striker
@@ -122,8 +142,11 @@ class Inning {
                     this.striker = this.nonStriker;
                     this.nonStriker = temp;
                 } else if (nextBall == 4 || nextBall == 6) {
+
                     this.striker.boundary++;
+
                 } else if (nextBall == -1) { // wide
+
                     this.wides[i - 1][j - 1]++;
                     this.overs[i - 1][j - 1] = nextBall;
                     battingTeam.runs++;
@@ -138,11 +161,16 @@ class Inning {
                 } else if (nextBall == -3) { // wicket
                     if (this.noBalls[i - 1][j - 1] > 0) // last ball is free hit
                         continue;
+
+                    // bawler wickets update
                     bawler.wickets++;
-                    Main.flushConsole();
-                    System.out.println(striker.name + " is out. Choose new batsman:");
-                    this.striker = battingTeam.choose(notEligibleBattersJersey);
                     battingTeam.wickets++;
+
+                    Main.clearConsole();
+                    System.out.println(striker.name + " is out. Choose new batsman:");
+
+                    this.striker.ballsPlayed++;
+                    this.striker = battingTeam.choose(notEligibleBattersJersey);
                     notEligibleBattersJersey[k++] = this.striker.jerseyNumber;
 
                     this.overs[i - 1][j - 1] = nextBall;
@@ -152,8 +180,10 @@ class Inning {
                 this.overs[i - 1][j - 1] = nextBall;
                 battingTeam.runs += nextBall;
                 this.striker.runs += nextBall;
+                this.striker.ballsPlayed++;
             }
-            this.scorecard.display();
+            this.bawler.oversDelivered += 1;
+            this.scorecard.display(i - 1); // passing index of over
             // swap striker and non-striker
             Player temp = this.striker;
             this.striker = this.nonStriker;
@@ -319,8 +349,8 @@ class CrictetMatch {
 public class Main {
     static Scanner sc = new Scanner(System.in);
 
-    static void flushConsole() {
-        System.out.print("\n".repeat(25));
+    static void clearConsole() {
+        System.out.print("\n".repeat(32));
     }
 
     public static void main(String[] args) {
