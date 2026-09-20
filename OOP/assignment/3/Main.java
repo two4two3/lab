@@ -34,9 +34,9 @@ class Player {
 }
 
 class Winners {
-    CrictetTeam team;
+    CricketTeam team;
 
-    Winners(CrictetTeam winners) {
+    Winners(CricketTeam winners) {
         this.team = winners;
     }
 }
@@ -87,8 +87,8 @@ class Inning {
     int wides[][];
     int noBalls[][];
     int target;
-    CrictetTeam battingTeam;
-    CrictetTeam fieldingTeam;
+    CricketTeam battingTeam;
+    CricketTeam fieldingTeam;
     Player striker;
     Player nonStriker;
     Player bawler;
@@ -96,7 +96,7 @@ class Inning {
     Scanner sc = Main.sc;
 
     Inning(
-            CrictetTeam battingTeam, CrictetTeam fieldingTeam,
+            CricketTeam battingTeam, CricketTeam fieldingTeam,
             int overs, int target) {
         this.battingTeam = battingTeam;
         this.fieldingTeam = fieldingTeam;
@@ -210,18 +210,18 @@ class Inning {
 }
 
 class Toss {
-    CrictetTeam team1;
-    CrictetTeam team2;
-    CrictetTeam winners;
+    CricketTeam team1;
+    CricketTeam team2;
+    CricketTeam winners;
     int decision;// 1. batting, 2. fielding
     Scanner sc = Main.sc;
 
-    Toss(CrictetTeam t1, CrictetTeam t2) {
+    Toss(CricketTeam t1, CricketTeam t2) {
         this.team1 = t1;
         this.team2 = t2;
     }
 
-    void decide(CrictetTeam tossWinner) {
+    void decide(CricketTeam tossWinner) {
 
         System.out.println(tossWinner.teamName + " " + "won the toss");
         System.out.print("\t1. batting\n\t2. fielding:\n>>>");
@@ -253,11 +253,11 @@ class Toss {
         return this.decision;
     }
 
-    CrictetTeam getTossWinnerTeam() {
+    CricketTeam getTossWinnerTeam() {
         return winners;
     }
 
-    CrictetTeam getTossLosserTeam() {
+    CricketTeam getTossLosserTeam() {
         if (team1 == winners) {
             return team2;
         } else {
@@ -267,14 +267,14 @@ class Toss {
 
 }
 
-class CrictetTeam {
+class CricketTeam {
     String teamName;
     Player players[];
     int runs;
     int wickets;
     Scanner sc = Main.sc;
 
-    CrictetTeam(String teamName, Player[] players) {
+    CricketTeam(String teamName, Player[] players) {
         this.teamName = teamName;
         this.players = players;
     }
@@ -314,17 +314,17 @@ class CrictetTeam {
     }
 }
 
-class CrictetMatch {
-    CrictetTeam team1;
-    CrictetTeam team2;
+class CricketMatch {
+    CricketTeam team1;
+    CricketTeam team2;
     int overs;
     Toss toss;
     Inning inningOne;
     Inning inningTwo;
     Winners winnerTeam;
 
-    CrictetMatch(
-            CrictetTeam t1, CrictetTeam t2,
+    CricketMatch(
+            CricketTeam t1, CricketTeam t2,
             int overs) {
         this.team1 = t1;
         this.team2 = t2;
@@ -444,9 +444,9 @@ public class Main {
                 new Player("Iftikhar Ahmed", 35, "95", "all-rounder")
         };
 
-        CrictetTeam t1 = new CrictetTeam("IND", players1);
-        CrictetTeam t2 = new CrictetTeam("PAK", players2);
-        CrictetMatch match = new CrictetMatch(t1, t2, 2);
+        CricketTeam t1 = new CricketTeam("IND", players1);
+        CricketTeam t2 = new CricketTeam("PAK", players2);
+        CricketMatch match = new CricketMatch(t1, t2, 2);
         match.startToss();
         match.startFirstInning();
         match.startSecondInning();
