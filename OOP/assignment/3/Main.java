@@ -51,7 +51,7 @@ class ScoreCard {
     void display(int over) {
 
         Main.clearConsole();
-        System.out.println("Over:" + over);
+        System.out.println("Over:" + (over + 1));
         System.out.println(
                 this.inn.striker.name + " : " + this.inn.striker.runs + "(" + this.inn.striker.ballsPlayed + ")");
         System.out
@@ -69,6 +69,10 @@ class ScoreCard {
             if (this.inn.noBalls[over][i] > 0) {
                 System.out.print("No Ball | ");
             }
+            if (currentBall == -3) {
+                System.out.print("Wicket |");
+                continue;
+            }
             System.out.print(currentBall + " | ");
         }
         System.out.println();
@@ -82,6 +86,7 @@ class Inning {
     int overs[][];
     int wides[][];
     int noBalls[][];
+    int target;
     CrictetTeam battingTeam;
     CrictetTeam fieldingTeam;
     Player striker;
@@ -92,9 +97,10 @@ class Inning {
 
     Inning(
             CrictetTeam battingTeam, CrictetTeam fieldingTeam,
-            int overs) {
+            int overs, int target) {
         this.battingTeam = battingTeam;
         this.fieldingTeam = fieldingTeam;
+        this.target = target;
         this.overs = new int[overs][6];
         this.wides = new int[overs][6];
         this.noBalls = new int[overs][6];
@@ -166,6 +172,10 @@ class Inning {
                     bawler.wickets++;
                     battingTeam.wickets++;
 
+                    if (battingTeam.wickets >= 10) { // 12 players 10 wickets
+                        return;
+                    }
+
                     Main.clearConsole();
                     System.out.println(striker.name + " is out. Choose new batsman:");
 
@@ -181,6 +191,12 @@ class Inning {
                 battingTeam.runs += nextBall;
                 this.striker.runs += nextBall;
                 this.striker.ballsPlayed++;
+                // Check chasing team has won
+                if (target > 0 && battingTeam.runs >= target) {
+                    System.out.println("\n" + battingTeam.teamName + " WON THE MATCH!");
+                    System.out.println("Score: " + battingTeam.runs + "/" + battingTeam.wickets);
+                    return;
+                }
             }
             this.bawler.oversDelivered += 1;
             this.scorecard.display(i - 1); // passing index of over
@@ -321,28 +337,71 @@ class CrictetMatch {
         int decision = this.toss.getDecision();
 
         if (decision == 1) { // batting
-            this.inningOne = new Inning(this.toss.getTossWinnerTeam(), this.toss.getTossLosserTeam(), this.overs);
-            this.inningTwo = new Inning(this.toss.getTossLosserTeam(), this.toss.getTossWinnerTeam(), this.overs);
+            this.inningOne = new Inning(this.toss.getTossWinnerTeam(), this.toss.getTossLosserTeam(), this.overs, 0);
+            this.inningTwo = new Inning(this.toss.getTossLosserTeam(), this.toss.getTossWinnerTeam(), this.overs, 0);
         } else if (decision == 2) { // fielding
-            this.inningOne = new Inning(this.toss.getTossLosserTeam(), this.toss.getTossWinnerTeam(), this.overs);
-            this.inningTwo = new Inning(this.toss.getTossWinnerTeam(), this.toss.getTossLosserTeam(), this.overs);
+            this.inningOne = new Inning(this.toss.getTossLosserTeam(), this.toss.getTossWinnerTeam(), this.overs, 0);
+            this.inningTwo = new Inning(this.toss.getTossWinnerTeam(), this.toss.getTossLosserTeam(), this.overs, 0);
         }
     }
 
     void startFirstInning() {
-        inningOne.start();
+        this.inningOne.start();
     }
 
     void startSecondInning() {
-        inningTwo.start();
+        this.inningTwo.target = this.inningOne.battingTeam.runs;
+        this.inningTwo.start();
     }
 
     void getScoreCard() {
 
+        System.out.println("\n========== FINAL SCORECARD ==========");
+
+        System.out.println(
+                inningOne.battingTeam.teamName + " : "
+                        + inningOne.battingTeam.runs + "/"
+                        + inningOne.battingTeam.wickets);
+
+        System.out.println(
+                inningTwo.battingTeam.teamName + " : "
+                        + inningTwo.battingTeam.runs + "/"
+                        + inningTwo.battingTeam.wickets);
+
+        System.out.println("=====================================");
     }
 
     void announceWinner() {
 
+        getScoreCard();
+
+        int score1 = inningOne.battingTeam.runs;
+        int score2 = inningTwo.battingTeam.runs;
+
+        if (score2 > score1) {
+
+            int wicketsRemaining = 11 - inningTwo.battingTeam.wickets;
+
+            System.out.println(
+                    inningTwo.battingTeam.teamName
+                            + " won by "
+                            + wicketsRemaining
+                            + " wickets.");
+
+        } else if (score1 > score2) {
+
+            int runs = score1 - score2;
+
+            System.out.println(
+                    inningOne.battingTeam.teamName
+                            + " won by "
+                            + runs
+                            + " runs.");
+
+        } else {
+
+            System.out.println("MATCH TIED!");
+        }
     }
 }
 
